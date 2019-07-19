@@ -1,1 +1,2 @@
 # burgers
+This app uses MySQL, Node, Express, Handlebars and Object Relational Mapping to log burgers.  The user is allowed to create any burger they like and its name will populate on the left-hand side of the screen with a 'devour' button to right of its entry.  If and when the user selects the 'devour' button the burger selection is moved to the right-hand side of the screen.  An MVC design pattern is used with Node and MySQL to query and route data whild handlebars generates the HTML.
