@@ -9,8 +9,9 @@ $(function(){
         var newBurger = {
             burger_name: $("#burgerinput").val().trim(),
             devoured: 0
-            
         };
+
+        console.log(newBurger);
 
         // Send the POST request.
         $.ajax("/api/burger", {
