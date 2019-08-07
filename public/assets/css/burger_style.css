@@ -1,27 +1,9 @@
+body {
+	background-color: #ebcf61;
+	margin-top: 20px;
+}
+
 img {
-    max-width: 20em;
-    max-height: 20em;
-    padding: auto;
-    margin: auto;
-}
-
-h1 {
-    padding: auto;
-    margin: auto;
-    font-family: fantasy;
-}
-
-.create-form {
-    padding: auto;
-    margin: auto;
-}
-
-
-.devoured {
-    text-align: center;
-}
-
-.write {
-    margin: auto;
-    padding: auto
+	width: 300px;
+	height: auto;
 }
