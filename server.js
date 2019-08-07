@@ -1,38 +1,35 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var exphbs = require("express-handlebars");
+// Dependencies
+var express = require('express');
 var methodOverride = require('method-override');
+var bodyParser = require('body-parser');
 
-// Import routes and give the server access to them.
-var burgersController = require("./controllers/burgers_controller.js");
-// Import the model (burger.js) to use its database functions.
-var burger = require("./models/burger.js");
+var PORT = process.env.PORT || 3000;
 
-var port = process.env.PORT || 3000;
-
+// Express app.
 var app = express();
+app.use(express.static(__dirname + '/public'));
 
-// Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static("public"));
+// Bodyparsers 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.json({ type: 'application/*+json' }));
+app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }));
+app.use(bodyParser.text({ type: 'text/html' }));
 
-app.use(methodOverride('X-HTTP-Method-Override'));
+// override with POST having ?_method=DELETE or PUT
+app.use(methodOverride('_method'));
 
-// Body-parser
-app.use(bodyParser.urlencoded({ extended: false }));
-
-// Handlebars
+// Handlebars 
+var exphbs = require('express-handlebars');
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-app.get("/", function(req, res) {
-	burger.selectAll(function(data) {
-		var hbsObject = {
-			burgers: data
-		};
-		console.log(hbsObject);
-		res.render("index", hbsObject);
-	});
-});
 
-app.use("/api/burgers", burgersController);
-app.listen(port);
+// Import routes
+var routes = require('./controllers/burgers_controller.js');
+app.use('/', routes);
+
+// Initiate listener
+app.listen(PORT, function() {
+  console.log("App listening on PORT " + PORT);
+});
