@@ -4,18 +4,15 @@ var router = express.Router();
 
 var burger = require("../models/burger.js");
 
-router.get('/', function(req, res) {
-        res.redirect('/index');
+router.get('/', function (req, res) {
+  res.redirect('/index');
 })
 
-router.get("/", function (req, res) {
+router.get("/index", function (req, res) {
   burger.selectAll(function (data) {
-    var dbObject = {
-      burgers: data,
-
-    };
+    var dbObject = { burgers: data };
     console.log(dbObject);
-
+    
     res.render("index", dbObject);
   });
 });
